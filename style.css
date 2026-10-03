@@ -1,40 +1,92 @@
 :root {
-  --agua: #0b4f5c;
-  --espuma: #e6f4f1;
+  --agua: #5d00d6;
+  --espuma: #f3eefa;
   --limao: #f2d230;
-  --tinta: #11292e;
+  --tinta: #1b1433;
   --branco: #ffffff;
-  --cinza: #b9c6c8;
+  --cinza: #cbc5d8;
   --erro: #b3261e;
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
-  font-family: 'Nunito', system-ui, sans-serif;
+  font-family: "Nunito", system-ui, sans-serif;
   color: var(--tinta);
   background: var(--espuma);
   line-height: 1.5;
 }
 
-[hidden] { display: none !important; }
+[hidden] {
+  display: none !important;
+}
 
-main { max-width: 640px; margin: 0 auto; padding: 0 16px 120px; }
+main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 16px 120px;
+}
 
 /* Cabeçalho */
-header { background: var(--agua); color: var(--branco); padding: 28px 16px 32px; }
-header .in { max-width: 640px; margin: 0 auto; }
-header p { margin: 0 0 4px; font-weight: 700; opacity: .85; }
-h1 { margin: 0 0 12px; font-size: 2rem; line-height: 1.1; font-weight: 900; }
-.premio { background: var(--limao); color: var(--tinta); border-radius: 14px; padding: 14px 16px; }
-.premio strong { display: block; font-size: 1.1rem; }
-.preco { margin-top: 10px; font-weight: 700; }
+header {
+  background: var(--agua);
+  color: var(--branco);
+  padding: 28px 16px 32px;
+}
+header .in {
+  max-width: 640px;
+  margin: 0 auto;
+}
+.logo {
+  display: block;
+  width: min(240px, 70%);
+  height: auto;
+  margin: 0 0 8px -8px;
+}
+.logo-ok {
+  display: block;
+  width: min(220px, 70%);
+  height: auto;
+  margin: 0 auto 4px;
+}
+h1 {
+  margin: 0;
+  font-size: 2rem;
+  line-height: 1.1;
+  font-weight: 900;
+}
+.premio {
+  background: var(--limao);
+  color: var(--tinta);
+  border-radius: 14px;
+  margin-top: 5px;
+  padding: 14px 16px;
+}
+.premio strong {
+  display: block;
+  font-size: 1.1rem;
+}
+.preco {
+  margin-top: 10px;
+  font-weight: 700;
+}
 
-h2 { font-size: 1.15rem; margin: 28px 0 10px; }
+h2 {
+  font-size: 1.15rem;
+  margin: 28px 0 10px;
+}
 
 /* Legenda e grade de números */
-.legenda { display: flex; gap: 16px; font-size: .85rem; margin-bottom: 10px; flex-wrap: wrap; }
+.legenda {
+  display: flex;
+  gap: 16px;
+  font-size: 0.85rem;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
 .legenda span::before {
   content: "";
   display: inline-block;
@@ -46,10 +98,20 @@ h2 { font-size: 1.15rem; margin: 28px 0 10px; }
   border: 2px solid var(--agua);
   background: var(--branco);
 }
-.legenda .sel::before { background: var(--limao); border-color: var(--tinta); }
-.legenda .ocu::before { background: var(--cinza); border-color: var(--cinza); }
+.legenda .sel::before {
+  background: var(--limao);
+  border-color: var(--tinta);
+}
+.legenda .ocu::before {
+  background: var(--cinza);
+  border-color: var(--cinza);
+}
 
-#grade { display: grid; grid-template-columns: repeat(10, 1fr); gap: 6px; }
+#grade {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 6px;
+}
 #grade button {
   aspect-ratio: 1;
   border: 2px solid var(--agua);
@@ -58,24 +120,41 @@ h2 { font-size: 1.15rem; margin: 28px 0 10px; }
   border-radius: 8px;
   font: inherit;
   font-weight: 700;
-  font-size: .8rem;
+  font-size: 0.8rem;
   padding: 0;
   cursor: pointer;
 }
-#grade button.sel { background: var(--limao); border-color: var(--tinta); color: var(--tinta); }
+#grade button.sel {
+  background: var(--limao);
+  border-color: var(--tinta);
+  color: var(--tinta);
+}
 #grade button:disabled {
   background: var(--cinza);
   border-color: var(--cinza);
-  color: #6b7b7e;
+  color: #756f85;
   text-decoration: line-through;
   cursor: not-allowed;
 }
 
-.carregando { text-align: center; padding: 24px; color: var(--agua); font-weight: 700; }
+.carregando {
+  text-align: center;
+  padding: 24px;
+  color: var(--agua);
+  font-weight: 700;
+}
 
 /* Formulário */
-form { background: var(--branco); border-radius: 14px; padding: 16px; }
-label { display: block; font-weight: 700; margin-bottom: 4px; }
+form {
+  background: var(--branco);
+  border-radius: 14px;
+  padding: 16px;
+}
+label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
 input {
   width: 100%;
   font: inherit;
@@ -100,15 +179,30 @@ input {
   color: var(--branco);
   cursor: pointer;
 }
-.btn:disabled { background: var(--cinza); color: #6b7b7e; cursor: not-allowed; }
-.btn.zap { background: #1faa59; margin-top: 12px; }
+.btn:disabled {
+  background: var(--cinza);
+  color: #756f85;
+  cursor: not-allowed;
+}
+.btn.zap {
+  background: #1faa59;
+  margin-top: 12px;
+}
 
 #grade button:focus-visible,
 input:focus-visible,
-.btn:focus-visible { outline: 3px solid var(--tinta); outline-offset: 2px; }
+.btn:focus-visible {
+  outline: 3px solid var(--tinta);
+  outline-offset: 2px;
+}
 
-#msg { margin: 12px 0 0; font-weight: 700; }
-#msg.erro { color: var(--erro); }
+#msg {
+  margin: 12px 0 0;
+  font-weight: 700;
+}
+#msg.erro {
+  color: var(--erro);
+}
 
 /* Barra fixa com os números escolhidos */
 #resumo {
@@ -124,12 +218,31 @@ input:focus-visible,
 }
 
 /* Tela de confirmação */
-#ok { background: var(--branco); border-radius: 14px; padding: 18px; margin-top: 24px; }
-#ok h2 { margin-top: 0; }
-.pix { background: var(--espuma); border-radius: 10px; padding: 10px 12px; word-break: break-all; font-weight: 700; }
+#ok {
+  background: var(--branco);
+  border-radius: 14px;
+  padding: 18px;
+  margin-top: 24px;
+}
+#ok h2 {
+  margin-top: 0;
+}
+.pix {
+  background: var(--espuma);
+  border-radius: 10px;
+  padding: 10px 12px;
+  word-break: break-all;
+  font-weight: 700;
+}
 
-.regras { font-size: .85rem; margin-top: 24px; opacity: .9; }
+.regras {
+  font-size: 0.85rem;
+  margin-top: 24px;
+  opacity: 0.9;
+}
 
 @media (prefers-reduced-motion: no-preference) {
-  #grade button { transition: background .12s; }
+  #grade button {
+    transition: background 0.12s;
+  }
 }

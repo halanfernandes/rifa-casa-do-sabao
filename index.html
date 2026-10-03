@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rifa do mês — Casa do Sabão</title>
+  <meta name="description" content="Escolha seus números e concorra a um kit de limpeza especial da Casa do Sabão.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <header>
+    <div class="in">
+      <p>Casa do Sabão</p>
+      <h1>Prêmio da Rifa do mês</h1>
+      <div class="premio">
+        <strong id="premio-titulo">Kit de limpeza especial</strong>
+        <span id="premio-itens"></span>
+      </div>
+      <div class="preco" id="preco-linha"></div>
+    </div>
+  </header>
+
+  <main>
+    <div id="area-rifa">
+      <h2>1. Escolha seus números</h2>
+      <div class="legenda">
+        <span>Livre</span>
+        <span class="sel">Escolhido</span>
+        <span class="ocu">Já vendido</span>
+      </div>
+      <div id="grade" role="group" aria-label="Números da rifa"></div>
+      <div class="carregando" id="carregando">Carregando números…</div>
+
+      <h2>2. Seus dados</h2>
+      <form id="form" novalidate>
+        <label for="nome">Nome</label>
+        <input id="nome" name="nome" autocomplete="name" required>
+
+        <label for="telefone">Telefone com DDD</label>
+        <input id="telefone" name="telefone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="(49) 99999-9999" required>
+
+        <button class="btn" id="enviar" type="submit" disabled>Reservar números</button>
+        <p id="msg" role="status"></p>
+      </form>
+
+      <p class="regras" id="regras"></p>
+    </div>
+
+    <div id="ok" hidden>
+      <h2>Números reservados!</h2>
+      <p>Seus números: <strong id="ok-numeros"></strong></p>
+      <p>Total a pagar: <strong id="ok-total"></strong></p>
+      <p>Pague por Pix para confirmar. Chave Pix:</p>
+      <div class="pix" id="ok-pix"></div>
+      <a class="btn zap" id="ok-zap" href="#" target="_blank" rel="noopener">Enviar comprovante no WhatsApp</a>
+    </div>
+  </main>
+
+  <div id="resumo" hidden></div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

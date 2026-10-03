@@ -1,0 +1,135 @@
+:root {
+  --agua: #0b4f5c;
+  --espuma: #e6f4f1;
+  --limao: #f2d230;
+  --tinta: #11292e;
+  --branco: #ffffff;
+  --cinza: #b9c6c8;
+  --erro: #b3261e;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Nunito', system-ui, sans-serif;
+  color: var(--tinta);
+  background: var(--espuma);
+  line-height: 1.5;
+}
+
+[hidden] { display: none !important; }
+
+main { max-width: 640px; margin: 0 auto; padding: 0 16px 120px; }
+
+/* Cabeçalho */
+header { background: var(--agua); color: var(--branco); padding: 28px 16px 32px; }
+header .in { max-width: 640px; margin: 0 auto; }
+header p { margin: 0 0 4px; font-weight: 700; opacity: .85; }
+h1 { margin: 0 0 12px; font-size: 2rem; line-height: 1.1; font-weight: 900; }
+.premio { background: var(--limao); color: var(--tinta); border-radius: 14px; padding: 14px 16px; }
+.premio strong { display: block; font-size: 1.1rem; }
+.preco { margin-top: 10px; font-weight: 700; }
+
+h2 { font-size: 1.15rem; margin: 28px 0 10px; }
+
+/* Legenda e grade de números */
+.legenda { display: flex; gap: 16px; font-size: .85rem; margin-bottom: 10px; flex-wrap: wrap; }
+.legenda span::before {
+  content: "";
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  margin-right: 6px;
+  vertical-align: -2px;
+  border: 2px solid var(--agua);
+  background: var(--branco);
+}
+.legenda .sel::before { background: var(--limao); border-color: var(--tinta); }
+.legenda .ocu::before { background: var(--cinza); border-color: var(--cinza); }
+
+#grade { display: grid; grid-template-columns: repeat(10, 1fr); gap: 6px; }
+#grade button {
+  aspect-ratio: 1;
+  border: 2px solid var(--agua);
+  background: var(--branco);
+  color: var(--agua);
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 700;
+  font-size: .8rem;
+  padding: 0;
+  cursor: pointer;
+}
+#grade button.sel { background: var(--limao); border-color: var(--tinta); color: var(--tinta); }
+#grade button:disabled {
+  background: var(--cinza);
+  border-color: var(--cinza);
+  color: #6b7b7e;
+  text-decoration: line-through;
+  cursor: not-allowed;
+}
+
+.carregando { text-align: center; padding: 24px; color: var(--agua); font-weight: 700; }
+
+/* Formulário */
+form { background: var(--branco); border-radius: 14px; padding: 16px; }
+label { display: block; font-weight: 700; margin-bottom: 4px; }
+input {
+  width: 100%;
+  font: inherit;
+  padding: 12px;
+  border: 2px solid var(--cinza);
+  border-radius: 10px;
+  margin-bottom: 14px;
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  text-decoration: none;
+  font: inherit;
+  font-weight: 900;
+  font-size: 1.05rem;
+  padding: 14px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--agua);
+  color: var(--branco);
+  cursor: pointer;
+}
+.btn:disabled { background: var(--cinza); color: #6b7b7e; cursor: not-allowed; }
+.btn.zap { background: #1faa59; margin-top: 12px; }
+
+#grade button:focus-visible,
+input:focus-visible,
+.btn:focus-visible { outline: 3px solid var(--tinta); outline-offset: 2px; }
+
+#msg { margin: 12px 0 0; font-weight: 700; }
+#msg.erro { color: var(--erro); }
+
+/* Barra fixa com os números escolhidos */
+#resumo {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--tinta);
+  color: var(--branco);
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+  text-align: center;
+  font-weight: 700;
+}
+
+/* Tela de confirmação */
+#ok { background: var(--branco); border-radius: 14px; padding: 18px; margin-top: 24px; }
+#ok h2 { margin-top: 0; }
+.pix { background: var(--espuma); border-radius: 10px; padding: 10px 12px; word-break: break-all; font-weight: 700; }
+
+.regras { font-size: .85rem; margin-top: 24px; opacity: .9; }
+
+@media (prefers-reduced-motion: no-preference) {
+  #grade button { transition: background .12s; }
+}

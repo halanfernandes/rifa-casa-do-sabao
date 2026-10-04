@@ -13,6 +13,17 @@ const CONFIG = {
   SORTEIO:
     "Sorteio pela Loteria Federal assim que os 100 números forem vendidos.",
 };
+
+// ── VENDEDORES ──────────────────────────────────────────────
+// Cada vendedor tem um link próprio: suapagina.com/rifa/?vendedor=ID
+// Para adicionar alguém novo, basta incluir uma linha aqui.
+const VENDEDORES = {
+  loja: { nome: "Casa do Sabão (Loja)" },
+  arthur: { nome: "Arthur" },
+  gisele: { nome: "Gisele" },
+  thais: { nome: "Thais" },
+  // joao: { nome: "João" },
+};
 // =================================================================
 
 const $ = (id) => document.getElementById(id);
@@ -21,6 +32,31 @@ const brl = (v) =>
 
 let ocupados = {};
 let escolhidos = new Set();
+
+// ── VENDEDOR ATUAL VIA LINK (?vendedor=ID) ──
+// Se o cliente abre o link com ?vendedor=arthur, guardamos no navegador
+// para que continue identificado mesmo se recarregar a página.
+// Link sem vendedor (ou com ID desconhecido) cai em "loja".
+function pegarVendedorAtual() {
+  const params = new URLSearchParams(window.location.search);
+  const idURL = (params.get("vendedor") || "").trim().toLowerCase();
+  let salvo = null;
+  try {
+    salvo = localStorage.getItem("rifaVendedorId");
+  } catch (e) {}
+
+  if (idURL && VENDEDORES[idURL]) {
+    try {
+      localStorage.setItem("rifaVendedorId", idURL);
+    } catch (e) {}
+    return { id: idURL, ...VENDEDORES[idURL] };
+  }
+
+  const id = salvo && VENDEDORES[salvo] ? salvo : "loja";
+  return { id, ...VENDEDORES[id] };
+}
+
+const vendedorAtual = pegarVendedorAtual();
 
 // Textos da página
 $("premio-titulo").textContent = CONFIG.PREMIO_TITULO;
@@ -126,7 +162,13 @@ $("form").addEventListener("submit", async (e) => {
     const r = await fetch(CONFIG.URL_SCRIPT, {
       method: "POST",
       headers: { "Content-Type": "text/plain;charset=utf-8" }, // evita bloqueio de CORS
-      body: JSON.stringify({ nome, telefone: tel, numeros: lista }),
+      body: JSON.stringify({
+        nome,
+        telefone: tel,
+        numeros: lista,
+        vendedorId: vendedorAtual.id,
+        vendedor: vendedorAtual.nome,
+      }),
     });
     const d = await r.json();
     if (d.ok) return confirmar(nome, lista);
@@ -148,7 +190,7 @@ function confirmar(nome, lista) {
   $("ok-numeros").textContent = lista.join(", ");
   $("ok-total").textContent = brl(total);
   $("ok-pix").textContent = CONFIG.CHAVE_PIX;
-  const txt =
+  let txt =
     "Olá! Sou " +
     nome +
     ". Reservei os números " +
@@ -156,6 +198,8 @@ function confirmar(nome, lista) {
     " da rifa (" +
     brl(total) +
     "). Segue o comprovante do Pix.";
+  if (vendedorAtual.id !== "loja")
+    txt += " Vendedor(a): " + vendedorAtual.nome + ".";
   $("ok-zap").href =
     "https://wa.me/" + CONFIG.WHATSAPP + "?text=" + encodeURIComponent(txt);
   window.scrollTo({ top: 0, behavior: "smooth" });

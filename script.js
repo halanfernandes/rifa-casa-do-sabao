@@ -205,4 +205,26 @@ function confirmar(nome, lista) {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
+// Botão "Copiar chave Pix"
+$("copiar-pix").addEventListener("click", async () => {
+  const btn = $("copiar-pix");
+  const chave = CONFIG.CHAVE_PIX;
+  try {
+    await navigator.clipboard.writeText(chave);
+  } catch (e) {
+    // Plano B para navegadores antigos ou sem permissão
+    const t = document.createElement("textarea");
+    t.value = chave;
+    t.style.position = "fixed";
+    t.style.opacity = "0";
+    document.body.appendChild(t);
+    t.select();
+    document.execCommand("copy");
+    document.body.removeChild(t);
+  }
+  const original = btn.textContent;
+  btn.textContent = "Copiado! ✓";
+  setTimeout(() => (btn.textContent = original), 2000);
+});
+
 carregar();

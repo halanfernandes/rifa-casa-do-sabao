@@ -188,6 +188,12 @@ input {
   background: #1faa59;
   margin-top: 12px;
 }
+.btn.copiar {
+  background: var(--branco);
+  color: var(--agua);
+  border: 2px solid var(--agua);
+  margin-top: 10px;
+}
 
 #grade button:focus-visible,
 input:focus-visible,
